@@ -1,24 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { createRoot } from 'react-dom/client';
+import Form from './Components/Form';
 import './style.css';
 
 const App = () => {
+
+  // TODO:
+  // 1. handle cases of 404 from api
+  // 2. filter items at least after they come from server
+  // 3. how to filter data during request?
+
   return (
     <div className="container">
-      <header>
-        <div className="logo" />
-        <h1>React webová aplikace</h1>
-      </header>
-      <main>
-        <p>
-          Startovací šablona pro webovou aplikaci v Reactu. Vytvořeno pomocí
-          <a href="https://www.npmjs.com/package/create-czechitas-app">create-czechitas-app</a>
-          .
-        </p>
-      </main>
-      <footer>
-        <p>Czechitas, Digitální akademie: Web</p>
-      </footer>
+      <Form />
     </div>
   );
 };
