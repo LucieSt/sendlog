@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Country from "../Country";
+import Results from "../Results";
 import './style.css';
 
 const Form = () => {
 
-	const [countryName, setCountryName] = useState('');
+	const [latitude, setLatitude] = useState('');
+	const [longitude, setLongitude] = useState('');
 	const [data, setData] = useState(null);
-	const myApi = `https://restcountries.com/v3.1/name/${countryName}`;
+	const myApi = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&long=${longitude}&appid=bb953e1cfd8558af5b149f309ada8480`;
 
 	const handleClick = (e) => {
 		e.preventDefault();
@@ -20,18 +21,21 @@ const Form = () => {
 	return (
 		<div className="form-container">
 			<form>
-				<label>country name
-					<input type="text" value={countryName} onChange={(e) => { setCountryName(e.target.value) }} />
+				<label>latitude
+					<input type="text" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} />
 				</label>
-				<button disabled={!countryName} onClick={handleClick}>button</button>
+				<label>longitude
+					<input type="text" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} />
+				</label>
+				<button disabled={!setLatitude} onClick={handleClick}>button</button>
 			</form>
 
 			<ul>
-				{data && data.map((country) => (
-					<Country
-						key={country.name.official}
-						name={country.name.common}
-						capital={country.capital}
+				{data && data.map((record) => (
+					<Results
+						key={record.lat}
+						latitude={record.lat}
+						longitude={record.lon}
 					/>
 				))}
 			</ul>
