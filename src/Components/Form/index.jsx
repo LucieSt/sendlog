@@ -7,7 +7,7 @@ const Form = () => {
 	const [latitude, setLatitude] = useState('');
 	const [longitude, setLongitude] = useState('');
 	const [data, setData] = useState(null);
-	const myApi = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&long=${longitude}&appid=bb953e1cfd8558af5b149f309ada8480`;
+	const myApi = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}`;
 
 	const handleClick = (e) => {
 		e.preventDefault();
@@ -15,6 +15,7 @@ const Form = () => {
 			.then((response) => response.json())
 			.then((data) => setData(data));
 	};
+	console.log(latitude, longitude)
 
 	console.log(data);
 
@@ -22,10 +23,10 @@ const Form = () => {
 		<div className="form-container">
 			<form>
 				<label>latitude
-					<input type="text" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} />
+					<input type="number" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} />
 				</label>
 				<label>longitude
-					<input type="text" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} />
+					<input type="number" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} />
 				</label>
 				<button disabled={!setLatitude} onClick={handleClick}>button</button>
 			</form>
@@ -33,9 +34,9 @@ const Form = () => {
 			<ul>
 				{data && data.map((record) => (
 					<Results
-						key={record.lat}
-						latitude={record.lat}
-						longitude={record.lon}
+						key={record.latitude}
+						latitude={record.latitude}
+						longitude={record.longitude}
 					/>
 				))}
 			</ul>
