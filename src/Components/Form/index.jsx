@@ -7,15 +7,14 @@ const Form = () => {
 	const [latitude, setLatitude] = useState('');
 	const [longitude, setLongitude] = useState('');
 	const [data, setData] = useState(null);
-	const myApi = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}`;
+	const myApi = `https://api.artic.edu/api/v1/artworks?page=2&limit=10`;
 
 	const handleClick = (e) => {
 		e.preventDefault();
 		fetch(myApi)
 			.then((response) => response.json())
-			.then((data) => setData(data));
+			.then((data) => setData(data.data));
 	};
-	console.log(latitude, longitude)
 
 	console.log(data);
 
@@ -34,9 +33,9 @@ const Form = () => {
 			<ul>
 				{data && data.map((record) => (
 					<Results
-						key={record.latitude}
-						latitude={record.latitude}
-						longitude={record.longitude}
+						key={record.title}
+						artist={record.artist_title}
+						title={record.title}
 					/>
 				))}
 			</ul>
