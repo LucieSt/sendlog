@@ -4,13 +4,16 @@ import './style.css';
 
 const Form = () => {
 
-	const [latitude, setLatitude] = useState('');
-	const [longitude, setLongitude] = useState('');
+	const [limit, setLimit] = useState('');
+	const [title, setTitle] = useState('');
 	const [data, setData] = useState(null);
-	const myApi = `https://api.artic.edu/api/v1/artworks?page=2&limit=10`;
 
 	const handleClick = (e) => {
 		e.preventDefault();
+
+		// API URL setup
+		const myApi = `https://api.artic.edu/api/v1/artworks?search?q=${title}&limit=${limit}`;
+
 		fetch(myApi)
 			.then((response) => response.json())
 			.then((data) => setData(data.data));
@@ -21,21 +24,22 @@ const Form = () => {
 	return (
 		<div className="form-container">
 			<form>
-				<label>latitude
-					<input type="number" value={latitude} onChange={(e) => { setLatitude(e.target.value) }} />
+				<label>title
+					<input type="text" value={title} onChange={(e) => { setTitle(e.target.value) }} />
 				</label>
-				<label>longitude
-					<input type="number" value={longitude} onChange={(e) => { setLongitude(e.target.value) }} />
+				<label>limit
+					<input type="number" value={limit} onChange={(e) => { setLimit(e.target.value) }} />
 				</label>
-				<button disabled={!setLatitude} onClick={handleClick}>button</button>
+				<button disabled={!setLimit} onClick={handleClick}>button</button>
 			</form>
 
 			<ul>
 				{data && data.map((record) => (
 					<Results
-						key={record.title}
+						key={record.id}
 						artist={record.artist_title}
 						title={record.title}
+						image={record.image_id}
 					/>
 				))}
 			</ul>
