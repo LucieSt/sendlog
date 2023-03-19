@@ -12,7 +12,7 @@ const Form = () => {
 		e.preventDefault();
 
 		// API URL setup
-		const myApi = `https://api.artic.edu/api/v1/artworks?search?q=${title}&limit=${limit}`;
+		const myApi = `https://api.artic.edu/api/v1/artworks/search?q=${title}&limit=${limit}&fields=id,title,artist_title,image_id,date_display,main_reference_number"`;
 
 		fetch(myApi)
 			.then((response) => response.json())
@@ -30,7 +30,7 @@ const Form = () => {
 				<label>limit
 					<input type="number" value={limit} onChange={(e) => { setLimit(e.target.value) }} />
 				</label>
-				<button disabled={!setLimit} onClick={handleClick}>button</button>
+				<button disabled={!setLimit} onClick={handleClick}>search</button>
 			</form>
 
 			<ul>
@@ -40,6 +40,7 @@ const Form = () => {
 						artist={record.artist_title}
 						title={record.title}
 						image={record.image_id}
+						dating={record.date_display}
 					/>
 				))}
 			</ul>

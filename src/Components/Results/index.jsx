@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import './style.css';
 
-const Results = ({ artist, title, image }) => {
+const Results = ({ artist, title, image, dating }) => {
 
 	const imgUrl = `https://www.artic.edu/iiif/2/${image}/full/300,/0/default.jpg`
-
-	console.log(image);
 
 	return (
 		<li>
@@ -13,6 +11,8 @@ const Results = ({ artist, title, image }) => {
 			<span>{artist ? artist : "anonymous"}</span>
 			<span>-</span>
 			<span>{title ? title : "no title"}</span>
+			<span>-</span>
+			<span>{dating ? dating : "?"}</span>
 		</li>
 	);
 };
