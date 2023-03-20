@@ -12,11 +12,14 @@ const Form = () => {
 		e.preventDefault();
 
 		// API URL setup
-		const myApi = `https://api.artic.edu/api/v1/artworks/search?q=${title}&limit=${limit}&fields=id,title,artist_title,image_id,date_display,main_reference_number"`;
+		const myApi = `https://api.artic.edu/api/v1/artworks/search?q=${title}&limit=${limit}&fields=id,title,artist_title,image_id,date_display`;
 
 		fetch(myApi)
 			.then((response) => response.json())
-			.then((data) => setData(data.data));
+			.then((data) => setData(data.data))
+			.catch(error => {
+				console.log(error);
+			});
 	};
 
 	console.log(data);
